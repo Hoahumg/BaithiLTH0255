@@ -14,7 +14,7 @@ namespace BaithiLTH0255.Controllers
     public class LTHCau3Controller : Controller
     {
         private readonly MvcMovieContext _context;
-        private StringProcess strPro = new StringProcess;
+        private StringProcess strPro = new StringProcess();
 
         public LTHCau3Controller(MvcMovieContext context)
         {
