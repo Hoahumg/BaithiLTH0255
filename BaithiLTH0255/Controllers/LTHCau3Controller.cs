@@ -7,12 +7,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BaithiLTH0255.Models;
 using MvcMovie.Data;
+using BaithiLTH0255.Models.Process;
 
 namespace BaithiLTH0255.Controllers
 {
     public class LTHCau3Controller : Controller
     {
         private readonly MvcMovieContext _context;
+        private StringProcess strPro = new StringProcess;
 
         public LTHCau3Controller(MvcMovieContext context)
         {
@@ -45,11 +47,27 @@ namespace BaithiLTH0255.Controllers
             return View(lTHCau3);
         }
 
-        // GET: LTHCau3/Create
+        // GET: Sinhvien/Create
+        //Sinh mã tự động 
+        //public IActionResult Create()
+        // {
+        //     return View();
+        // }
         public IActionResult Create()
         {
+            
+            var IDdautien = "S1";
+            var countAnh = _context.LTHCau3.Count();
+            if (countAnh > 0)
+            {
+                var Masinhvien = _context.LTHCau3.OrderByDescending(m => m.Masinhvien).First().Masinhvien;
+                IDdautien = strPro.AutoGenerateCode(Masinhvien);
+            }
+            ViewBag.newID = IDdautien;
             return View();
         }
+
+
 
         // POST: LTHCau3/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
